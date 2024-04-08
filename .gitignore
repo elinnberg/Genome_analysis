@@ -1,0 +1,13 @@
+# ignore all files starting with . or -
+.*
+-*
+# ignore intermediates and logs
+intermediate/trimmed
+logs/*.log
+scratch/*
+results/*
+
+# ignore data files
+*.fastq.gz
+*.RData
+*.tsv
