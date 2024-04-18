@@ -10,7 +10,8 @@
 #SBATCH --output=%x.%j.out
 
 #change or remove the folowing depending on when you run the script
-#SBATCH --reservation=uppmax2024-2-7_5
+#SBATCH --reservation=uppmax2024-2-7_6
+
 
 # Load modules
 module load bioinfo-tools
@@ -20,10 +21,13 @@ module load star/2.7.11a
 #/home/elinb/Genome_Analysis/4_Tean_Teh_2017/transcriptome/trimmed/SRR6156069_scaffold_10.2.fastq.gz"
 
 # You run the STAR program with the forward and reverse strand for every sample in the trimmed directory. which will result in a new BAm file for every sample
-# Run STAR alignment
+# Run STAR alignment.
+# For every rum, the outfilename prefix and the sample codes are changes, to account for a 8 pairs.
+
 STAR --genomeDir /home/elinb/Genome_analysis/genomeindex_4star \ # Path to the directory containing the indexed reference genome \
-     --readFilesIn /home/elinb/Genome_Analysis/Raw_Data/4_Tean_Teh_2017/transcriptome/trimmed/SRR6156069_scaffold_10.2.fastq.gz \
+     --readFilesCommand zcat --readFilesIn /home/elinb/Genome_analysis/Raw_Data/4_Tean_Teh_2017/transcriptome/trimmed/SRR6156069_scaffold_10.1.fastq.gz \
+/home/elinb/Genome_analysis/Raw_Data/4_Tean_Teh_2017/transcriptome/trimmed/SRR6156069_scaffold_10.2.fastq.gz \
      --runThreadN $SLURM_NTASKS \
      --outSAMtype BAM SortedByCoordinate \
-     --outFileNamePrefix /home/elinb/Genome_analysis/star_results/mapped_reads_
+     --outFileNamePrefix /home/elinb/Genome_analysis/star_results/SRR6156069_scaffold_10
 
