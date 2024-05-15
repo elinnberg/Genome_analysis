@@ -24,4 +24,4 @@ gffread -w transcripts_foreggnog.fa -g pilon_output.fasta.masked braker_gff/brak
 
 # Use eggnogmapper for my fasta file i used for braker, as well as the genemark file.
 # Will generate eggnogresult of the transcripts (not genes), however they have the same numbers. 
-emapper.py -m diamond --itype CDS --translate -i transcripts_foreggnog.fa -o eggnogresult_15may2
+emapper.py -m diamond --itype CDS --translate -i transcripts_foreggnog.fa -o eggnogresult eggnogresult_final.emapper.annotations
