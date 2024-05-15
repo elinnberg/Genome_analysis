@@ -3,8 +3,8 @@
 #SBATCH -M snowy
 #SBATCH -p core
 #SBATCH -n 2 #from manual
-#SBATCH -t 20:00:00
-#SBATCH -J eggnog_job
+#SBATCH -t 06:00:00
+#SBATCH -J eggnognew
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user elinberg3@gmail.com
 #SBATCH --output=%x.%j.out
@@ -17,9 +17,11 @@ module load eggNOG-mapper/2.1.9
 
 module load gffread/0.12.7
 
-#genemark_durian is for my annotation that I did with the correct script.
-gffread -E braker/Durian/augustus.hints.gff -o genemark_gff/genemark_durian.gff
+
+#gffread to create fasta file for emapper
+gffread -w transcripts_foreggnog.fa -g pilon_output.fasta.masked braker_gff/braker/Durian/GeneMark-ET/genemark.gtf
+
 
 # Use eggnogmapper for my fasta file i used for braker, as well as the genemark file.
-# emapper.py -m diamond -i pilon_output.fasta.masked -i genemark_gff/genemark_durian.gff 
-emapper.py -m diamond --itype CDS --translate -i pilon_output.fasta.masked -o eggnogresult --decorate_gff genemark_gff/genemark_durian.gff
+# Will generate eggnogresult of the transcripts (not genes), however they have the same numbers. 
+emapper.py -m diamond --itype CDS --translate -i transcripts_foreggnog.fa -o eggnogresult_15may2
