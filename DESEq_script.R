@@ -20,7 +20,7 @@ count_data_lst <- lapply(count_files, function(file) {
   setNames(counts$counts, counts$gene)
 })
 
-# Extract base file names (sample identifiers) and assign to count data list
+# Extract base file names to count data list
 count_file_names <- gsub(".txt$", "", basename(count_files))
 names(count_data_lst) <- count_file_names
 
